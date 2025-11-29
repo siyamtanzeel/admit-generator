@@ -1,10 +1,14 @@
 "use client";
+import { students } from "@/constants/studentData";
 import Image from "next/image";
+import { useState } from "react";
 import { Margin, Resolution, usePDF } from "react-to-pdf";
 
 export default function Home() {
+  const [student, setStudent] = useState(students[0]);
+  const [index, setIndex] = useState(0);
   const { toPDF, targetRef } = usePDF({
-    filename: "example.pdf",
+    filename: `${student.roll}.pdf`,
     page: { margin: Margin.MEDIUM, orientation: "landscape" },
     resolution: Resolution.HIGH,
   });
@@ -37,20 +41,20 @@ export default function Home() {
                 বিসমিল্লাহির রাহমানির রাহীম
               </p>
               <h3 className="text-xl font-bold text-black w-full">
-                মাস্টার মোখছেদুর রহমান ফাউন্ডেশন এর পৃষ্ঠপোষকতায় <br />
+                মাষ্টার মোকছেদুর রহমান ফাউন্ডেশন এর পৃষ্ঠপোষকতায় <br />
                 ও <br />
                 সেনবাগ উপজেলা ওয়েলফেয়ার সোসাইটি ইউএসএ ইনক এর সহযোগিতায়
               </h3>
               <h1 className="text-[#0b47a5] text-4xl font-bold">
-                স্কাইরক বৃত্তি পরীক্ষা ২০২৫
+                স্কাইরক্স বৃত্তি পরীক্ষা ২০২৫
               </h1>
               <p className="text-black text-sm font-bold">
-                মাইজদীপুর, সেনবাগ, নোয়াখালী
+                মইজদীপুর, সেনবাগ, নোয়াখালী
               </p>
               {/* colored box */}
               <div className="w-[240px] h-[50px] grid grid-cols-2 items-center justify-center text-lg font-bold shadow-sm  rounded-r-2xl rounded-l-2xl text-center">
                 <span className="bg-[#066406] h-full rounded-l-2xl  border-2 border-white">
-                  প্রবেশ পত্র
+                  প্রবেশপত্র
                 </span>
                 <span className="bg-[#b90505] h-full rounded-r-2xl  border-2 border-white">
                   শ্রেণীঃ ৮ম{" "}
@@ -75,16 +79,16 @@ export default function Home() {
             <div className="grid grid-cols-6 gap-2">
               {/* second row 1st row 1st column */}
               <div className="col-span-1 font-bold flex flex-col items-start justify-center">
-                <span>শিক্ষার্থীর নাম</span>
+                <span>পরীক্ষার্থীর নাম</span>
                 <span>পিতার নাম</span>
               </div>
               {/* second row 1st row 2nd column */}
               <div className="col-span-2 flex flex-col items-start justify-center">
                 <span className="border-dotted border-b-2 pb-2 w-full">
-                  : মোহাম্মদ এ এন এম মিনহাজুর রহমান
+                  : {student.name}
                 </span>
                 <span className="border-dotted border-b-2 pb-2 w-full">
-                  : নুর আলম{" "}
+                  :{student.fatherName}
                 </span>
               </div>
               {/* second row 1st row 3rd column */}
@@ -95,10 +99,10 @@ export default function Home() {
               {/* second row 1st row 4th column */}
               <div className="col-span-2 flex flex-col items-start justify-center">
                 <span className="border-dotted border-b-2 pb-2 w-full">
-                  : ০১
+                  : {student.roll}
                 </span>
                 <span className="border-dotted border-b-2 pb-2 w-full">
-                  : কানিজ সুলতানা
+                  : {student.motherName}
                 </span>
               </div>
             </div>
@@ -112,10 +116,10 @@ export default function Home() {
               {/* second row 2nd row 2nd column */}
               <div className="col-span-5 flex flex-col items-start justify-center">
                 <span className="border-dotted border-b-2 pb-2 w-full">
-                  : কল্যাণী ফজলুল হক দাখিল মাদ্রাসা, সেনবাগ
+                  : {student.school}
                 </span>
                 <span className="border-dotted border-b-2 pb-2 w-full">
-                  : মাইজদীপুর আশরাফুল উলুম দাখিল মাদ্রাসা
+                  : {student.centre}
                 </span>
               </div>
             </div>
@@ -138,7 +142,7 @@ export default function Home() {
               {/* second row 3rd row 4th column */}
               <div className="col-span-2 flex flex-col items-start justify-center">
                 <span className="border-dotted border-b-2 pb-2 w-full">
-                  : ১০ঃ০০ — ১১ঃ৩০
+                  : ১০ঃ০০ - ১১ঃ৩০
                 </span>
               </div>
             </div>
@@ -150,10 +154,11 @@ export default function Home() {
               <p className="text-sm text-black">
                 ১. পরীক্ষা শুরুর ৩০ মিনিট পূর্বে পরীক্ষার্থীকে পরীক্ষা কেন্দ্রে
                 উপস্থিত হতে হবে। <br />
-                ২. কাগজপত্র/ বইপত্র/ মোবাইল ফোন/ ক্যালকুলেটর/ স্মার্ট ঘড়ি বা
-                যেকোনো ইলেকট্রনিক ডিভাইস কেন্দ্রের ভেতর আনা যাবে না। <br />
-                ৩. পরীক্ষাকেন্দ্রের ভিতরে কোনো অসদুপায় অবলম্বন করলে পরীক্ষার্থীর
-                পরীক্ষা বাতিলসহ তার বিরুদ্ধে আইনানুগ ব্যবস্থা গ্রহণ করা হবে।
+                ২. ঘড়ি, ক্যালকুলেটরসহ কোনো ধরণের ইলেকট্রনিক ডিভাইস নিয়ে কেন্দ্রে
+                প্রবেশ করা যাবেনা। <br />
+                ৩. কোনো পরীক্ষার্থীর পক্ষে বহিরাগত কোনো শিক্ষার্থী পরীক্ষায়
+                অংশগ্রহণ করলে পরীক্ষার্থীর পরীক্ষা বাতিলসহ তার বিরুদ্ধে আইনানুগ
+                ব্যবস্থা গ্রহণ করা হবে।
               </p>
             </div>
             <div className="col-span-2 flex items-end justify-center text-center">
@@ -165,12 +170,38 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <button
-        type="button"
-        className="bg-indigo-500 px-3 py-2 rounded-lg mt-7"
-        onClick={() => toPDF()}>
-        Download PDF
-      </button>
+      <div className="flex flex-col items-center justify-center mx-auto">
+        <input
+          type="number"
+          className="px-3 py-2 mt-20 rounded-2xl outline outline-indigo-500 text-black"
+          name=""
+          id=""
+          value={index}
+          onChange={(e) => {
+            const newIndex = parseInt(e.target.value) || 0;
+            if (newIndex >= 0 && newIndex < students.length) {
+              setIndex(newIndex);
+              setStudent(students[newIndex]);
+            }
+          }}
+        />
+        <button
+          type="button"
+          className="bg-indigo-500 px-3 py-2 rounded-lg mt-7"
+          onClick={() => {
+            const currentIndex = index;
+            if (currentIndex >= 0 && currentIndex < students.length) {
+              // Update student first
+              const selectedStudent = students[currentIndex];
+              setStudent(selectedStudent);
+
+              // Use requestAnimationFrame to ensure DOM is updated
+              toPDF();
+            }
+          }}>
+          Download PDF
+        </button>
+      </div>
     </div>
   );
 }
